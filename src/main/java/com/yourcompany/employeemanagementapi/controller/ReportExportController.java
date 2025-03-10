@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/reports")
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = {
+    "http://localhost:3001", // Frontend local
+    "https://apifrontemployeenemin.netlify.app", // Frontend no Netlify (produção)
+    "https://empl.neemindev.com" // Subdomínio personalizado (frontend - produção)
+})
 public class ReportExportController {
 
     private final ReportExportService reportExportService;
