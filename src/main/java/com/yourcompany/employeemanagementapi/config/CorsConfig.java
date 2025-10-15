@@ -11,14 +11,16 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**") // 🟢 Define o padrão de URL para aplicar o CORS
+        registry.addMapping("/api/**")
                 .allowedOrigins(
-                    "https://apifrontemployeenemin.netlify.app", // Frontend no Netlify
-                    "https://empl.neemindev.com", // Subdomínio personalizado (frontend)
-                    "https://apiempl.neemindev.com" // Subdomínio do backend (Load Balancer)
+                    "*", // ✅ APKs e testes gerais
+                    "https://empl.neemindev.com", // ✅ FRONTEND PRINCIPAL
+                    "https://employee-container.neemindev.com", // ✅ CONTAINER
+                    "https://financial-container.neemindev.com", // ✅ OUTRO CONTAINER
+                    "https://apiestoque.neemindev.com" // ✅ OUTRO CONTAINER
                 )
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
-                .allowedHeaders("*") // Todos os cabeçalhos permitidos
-                .allowCredentials(true); // Permite credenciais (cookies, autenticação)
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(false);
     }
 }
