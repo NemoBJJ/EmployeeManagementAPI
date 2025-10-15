@@ -29,10 +29,12 @@ jobs:
         ECR_REPOSITORY: employee-api
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        $imageTag = "$env:ECR_REGISTRY/$env:ECR_REPOSITORY:$env:IMAGE_TAG"
+        $latestTag = "$env:ECR_REGISTRY/$env:ECR_REPOSITORY:latest"
+        docker build -t $imageTag .
+        docker push $imageTag
+        docker tag $imageTag $latestTag
+        docker push $latestTag
         
     - name: Update ECS Service
       run: |
